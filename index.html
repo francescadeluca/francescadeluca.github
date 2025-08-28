@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Foto</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      font-family: sans-serif;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .grid img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Overlay fullscreen */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <img src="https://placekitten.com/400/300" alt="foto1">
+    <img src="https://placekitten.com/401/300" alt="foto2">
+    <img src="https://placekitten.com/402/300" alt="foto3">
+    <img src="https://placekitten.com/403/300" alt="foto4">
+    <img src="https://placekitten.com/404/300" alt="foto5">
+  </div>
+
+  <!-- Overlay fullscreen -->
+  <div class="overlay" id="overlay">
+    <img src="" alt="fullscreen">
+  </div>
+
+  <script>
+    const images = document.querySelectorAll(".grid img");
+    const overlay = document.getElementById("overlay");
+    const overlayImg = overlay.querySelector("img");
+
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        overlayImg.src = img.src;
+        overlay.classList.add("active");
+      });
+    });
+
+    overlay.addEventListener("click", () => {
+      overlay.classList.remove("active");
+    });
+  </script>
+</body>
+</html>
